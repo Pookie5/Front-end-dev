@@ -1,0 +1,38 @@
+const connection = new solanaWeb3.Connection('https://api.mainnet-beta.solana.com');
+let wallet;
+
+async function connectWallet() {
+    try {
+        wallet = await solanaWeb3.Wallet.connect();
+        const publicKey = wallet.publicKey.toBase58();
+
+        document.getElementById('walletAddress').innerText = publicKey;
+
+        const balance = await connection.getBalance(wallet.publicKey);
+        document.getElementById('walletBalance').innerText = balance / solanaWeb3.LAMPORTS_PER_SOL;
+    } catch (error) {
+        console.error('Error connecting wallet:', error);
+    }
+}
+
+function sell() {
+    // Implement selling logic using Solana Web3
+    alert('Selling $GWF');
+}
+
+function stake() {
+    // Implement staking logic using Solana Web3
+    alert('Staking $GWF');
+}
+
+function openMarketplace() {
+    document.getElementById('actionsSection').style.display = 'none';
+    document.getElementById('marketplaceSection').style.display = 'block';
+}
+
+function buyNFT() {
+    // Implement buying NFT logic using Solana Web3
+    alert('Buying $GWF NFT');
+}
+
+document.getElementById('connectWalletBtn').addEventListener('click', connectWallet);
